@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Piggi - Goals</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+	<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+
+
+
+	<style>
+
+		body {
+			background-color: #FFF8E7;
+		}
+
+		.homeBtn {
+			width: 264px;
+			height: 74px;
+			background: #FECE76;
+			border-radius: 20px;
+		}
+
+		.homeText {
+			font-family: "Baloo 2";
+			font-size: 50px;
+			text-align: center;
+			color: #000000;
+		}
+
+		.verticalAlign {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.goalDashboardText {
+			width: 302px;
+			height: 161px;
+			font-family: "Baloo 2";
+			font-size: 50px;
+			color: #000000;
+			margin-bottom: 40px;
+			text-align: left;
+		}
+
+		.pinkContainer {
+			width: 332px;
+			height: 212px;
+			left: 92px;
+			top: 308px;
+			margin-bottom: 70px;
+			background-color: #FF7E8C;
+			border-radius: 30px;
+		}
+
+		.newGoalBtn {
+			width: 341px;
+			height: 77px;
+			background: #FECE76;
+			border-radius: 20px;
+		}
+
+		.newGoalBtnText {
+			height: 100%;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font-family: "Baloo 2";
+			font-size: 40px;
+			color: #000000;
+		}
+
+		.pinkContainerDollarSign {
+			width: 100%;
+			height: 47px;
+			font-family: "Baloo 2";
+			font-size: 30px;
+			color: #FFFFFF;
+			padding: 20px;
+		}
+
+		.pinkContainterGoalTitle {
+			font-family: "Baloo 2";
+			font-size: 40px;
+			color: #FFFFFF;
+		}
+
+		.pinkContainerGoalStatusBar {
+			width: 264px;
+			height: 16px;
+			background: #FFFFFF;
+			border-radius: 40px;
+			padding: 0px;
+		}
+
+		.pinkContainerGoalStatusProgress {
+			width: 167px;
+			height: 16px;
+			background: #4CAF50;
+			border-radius: 40px;
+		}
+
+		.addToSavingsBtn {
+			width: 167px;
+			height: 35px;
+			background: #FFFFFF;
+			margin-top: 40px;
+		}
+
+		.addToSavingsBtnText {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font-family: "Baloo 2";
+			font-size: 20px;
+		}
+
+		.starImg {
+			width: 143px;
+			height: 143px;
+			padding: 0px;
+		}
+
+		.customModal {
+			width: 723px;
+			height: 558px;
+			background: #FFFFFF;
+			border-radius: 20px;
+		}
+
+		.customCloseX {
+			height: 60px;
+			font-family: "Baloo 2";
+			font-size: 60px;
+			color: #000000;
+		}
+
+		.modalTitleText {
+			font-family: "Baloo 2";
+			font-size: 60px;
+			color: #000000;
+		}
+
+		.greenText {
+			color: #4CAF50;
+			text-align: right;
+		}
+
+		.modalNote {
+			font-family: "Baloo 2";
+			font-size: 40px;
+			color: #000000;
+			font-weight: bolder;
+		}
+
+		.modalEnterSavingsText {
+			margin-top: 40px;
+			font-family: "Baloo 2";
+			font-size: 30px;
+			color: #000000;
+		}
+
+		.modalSavingsDiv {
+			width: 236px;
+			height: 46px;
+			background: #E5E5E5;
+		}
+
+		.modalSavingsText {
+			font-family: "Baloo 2";
+			font-size: 25px;
+			color: #000000;
+			padding: 7px 15px;
+			background: #E5E5E5;
+		}
+
+		.startDate {
+			margin-top: 50px;
+			font-family: "Baloo 2";
+			font-weight: bold;
+			font-size: 25px;
+			color: #000000;
+		}
+
+		.newGoalModalTitle {
+			width: 334px;
+			height: 86px;
+			font-family: "Baloo 2";
+			font-size: 60px;
+			text-align: center;
+			color: #000000;
+		}
+
+		.enterGoalTitle {
+			width: 594px;
+			height: 86px;	
+			font-family: "Baloo 2";
+			font-size: 30px;
+			color: #000000;
+			margin-top: 20px;
+		}
+
+		.redText {
+			color: red;
+		}
+
+		.goalInput {
+			width: 300px;
+			height: 37px;
+			background: #E5E5E5;
+		}
+
+		.nopadding {
+			padding: 0 !important;
+			margin: 0 !important;
+		}
+
+		.approvalBtn {
+			width: 300px;
+			height: 54px;
+			margin-top: 45px;
+			background: #8BE9F0;
+			border-radius: 10px;
+		}
+
+		.approvalText {
+			font-family: "Baloo 2";
+			font-size: 30px;
+			text-align: center;
+			color: #000000
+		}	
+
+	</style>
+</head>
+<body>
+
+	<!-- Savings Modal -->
+	<div class="modal fade savingsModal" id="savingsModal" tabindex="-1" role="dialog" aria-labelledby="savingsModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content customModal">
+				<div class="container">
+					<div class="row">
+						<div class="close" data-dismiss="modal" aria-label="Close" >
+							<div class="customCloseX" align="right">X</div>
+						</div>
+					</div>
+					<div class="container px-5">
+						<div class="row">
+							<div class="col-6 modalTitleText">iPad</div>
+							<div class="col-2"></div>
+							<div class="col-4 modalTitleText greenText">$200</div>
+						</div>
+						<div class="row">
+							<div class="col modalNote">
+								You have saved <span class="greenText">$120.</span><br> 
+								Keep it up, Anna!
+							</div>
+						</div>
+						<div class="row">
+							<div class="col modalEnterSavingsText">
+								Please enter how much money from your account you want to add to your iPad savings:
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-5">
+								<div class="modalSavingsDiv">
+									<input name="moneySaved" type="text" class="modalSavingsText" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col startDate">
+								Start date: <span class="date">12/01/2020</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- New Goals Modal -->
+	<div class="modal fade" id="newGoalsModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content customModal">
+				<div class="container">
+					<div class="row">
+						<div class="close" data-dismiss="modal" aria-label="Close" >
+							<div class="customCloseX" align="right">X</div>
+						</div>
+					</div>
+					<div class="container px-5">
+						<div class="row">
+							<div class="col newGoalModalTitle">NEW GOAL</div>
+						</div>
+						<div class="row">
+							<div class="container">
+								<div class="row enterGoalTitle">
+									<div class="nopadding">Please enter goal title: <span class="redText">*</span></div>
+									<input name="goalTitle" type="text" class="goalInput" />
+								</div>
+								<div class="row enterGoalTitle">
+									<div class="nopadding">Please enter goal amount: <span class="redText">*</span></div>
+									<input name="goalAmount" type="text" class="goalInput" />
+								</div>
+								<div class="row justify-content-md-center">
+									<div class="approvalBtn verticalAlign">
+										<div class="approvalText" data-dismiss="modal" aria-label="Close">Submit for approval!</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3">
+				<img src="file:///Users/mac/Desktop/Group%201.png" />
+			</div>
+			<div class="col-6"></div>
+			<div class="col-3 verticalAlign">
+				<div class="homeBtn">
+					<div class="homeText">Home</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4"></div>
+			<div class="col-4" align="center">
+				<div class="row">
+					<img class="starImg" src="file:///Users/mac/Desktop/star.png" />
+					<div class="goalDashboardText">GOAL DASHBOARD</div>
+				</div>
+			</div>
+			<div class="col-4"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4" align="center">
+			<div class="newGoalBtn">
+				<div class="newGoalBtnText">NEW GOAL</div>
+			</div>
+		</div>
+		<div class="col-4">
+			
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+	apiKey: "AIzaSyBAVEnsYxK13SLlch9ilV-oL_CaXgF4MeI",
+	authDomain: "shehacksv-aa7cd.firebaseapp.com",
+	databaseURL: "https://shehacksv-aa7cd-default-rtdb.firebaseio.com",
+	projectId: "shehacksv-aa7cd",
+	storageBucket: "shehacksv-aa7cd.appspot.com",
+	messagingSenderId: "908859718407",
+	appId: "1:908859718407:web:e2905b5389a0180832a3a2"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+   //establishes root of db
+   var rootRef = firebase.database().ref();
+
+    //creates ref for node
+    var ref = rootRef.child('goals');
+
+    var currentlySaved = 120;
+
+    var numOfGoals = 0;
+
+    var goal = 0;
+
+    ref.on('value', function(snap) { 
+    	if ($('.goalRow').length == 0) {
+    		$('.container-fluid').append("<div class='row goalRow'></div>");
+    		snap.forEach(function(child){
+
+    			if (numOfGoals % 3 == 0) {
+    				$('.container-fluid').append("<div class='row goalRow'></div>");
+    			}
+    			numOfGoals++;
+    			var dollarSignsString;
+    			if (child.val().goalAmount <= 20) {
+    				dollarSignsString = "$";
+    			}
+    			else if (child.val().goalAmount >= 20 && child.val().goalAmount <= 50) {
+    				dollarSignsString = "$$";
+    			}
+    			else {
+    				dollarSignsString = "$$$";
+    			}
+
+    			var goal = child.val().goalAmount;
+
+    			var goalComponent = "<div class='col-4'><div class='container'><div class='row justify-content-md-center'><div class='container pinkContainer'><div class='row'><div class='pinkContainerDollarSign' align='right'>" + dollarSignsString + "</div></div><div class='row'><div class='pinkContainterGoalTitle'>" + child.val().goalTitle + "</div></div><div class='row justify-content-md-center'><div class='addToSavingsBtn'><div class='addToSavingsBtnText'>Add to Savings</div> <input type='hidden' id='goalAmount' name='goalAmount' value='" + child.val().goalAmount + "'></div></div></div></div></div>";
+
+    			$('.addToSavingsBtn').on('click', function() {
+    				setUpModal($(this).find('#goalAmount').val());
+    			});
+    			$('.goalRow').last().append(goalComponent);
+    		});
+
+    	}
+    });
+
+    $('.customCloseX').on('click', function() {
+    	var amountSaved = $(".modalSavingsText").val();
+    	if (amountSaved != null) {
+    		currentlySaved = currentlySaved + parseInt(amountSaved);
+    		var savedProgress = (currentlySaved / goal) * 10 * 17.5;
+    		$('.pinkContainerGoalStatusProgress').css('width', savedProgress + 'px');
+    	}
+    });
+
+    $('.approvalBtn').on('click', function() {
+    	var goalTitle = $('input[name = goalTitle]').val();
+    	var goalAmount = $("input[name = goalAmount]").val();
+    	numOfGoals++;
+    	if (numOfGoals % 3 == 0) {
+    		$('.container-fluid').append("<div class='row goalRow'></div>");
+    	}
+    	numOfGoals++;
+    	var dollarSignsString;
+    	if (parseInt(goalAmount) <= 20) {
+    		dollarSignsString = "$";
+    	}
+    	else if (parseInt(goalAmount) >= 20 && parseInt(goalAmount) <= 50) {
+    		dollarSignsString = "$$";
+    	}
+    	else {
+    		dollarSignsString = "$$$";
+    	}
+
+    	var goalComponent = "<div class='col-4'><div class='container'><div class='row justify-content-md-center'><div class='container pinkContainer'><div class='row'><div class='pinkContainerDollarSign' align='right'>" + dollarSignsString + "</div></div><div class='row'><div class='pinkContainterGoalTitle'>" + goalTitle + "</div></div><div class='row justify-content-md-center'><div class='pinkContainerGoalStatusBar'><div class='pinkContainerGoalStatusProgress' align='left'></div></div></div><div class='row justify-content-md-center'><div id='addToSavings' class='addToSavingsBtn'><div class='addToSavingsBtnText'>Add to Savings</div></div></div></div></div></div>";
+    	$('.goalRow').last().append(goalComponent);
+
+    	firebase.database().ref('goals/' + (numOfGoals + 1)).set({
+    		goalTitle: goalTitle,
+    		goalAmount: goalAmount
+    	});
+
+    });
+
+    $('.newGoalBtn').on('click', function() {
+    	$('#newGoalsModal').modal({
+    		keyboard: false,
+    		backdrop: 'static'
+    	});
+    	$('#newGoalsModal').modal('show');
+    });
+
+
+    function setUpModal(goalAmount) {
+    	$('.addToSavingsBtn').on('click', function() {
+    		console.log(goalAmount);
+    		$('.savingsModal').find(".modalTitleText.greenText").text("$" + goalAmount);
+    		$('.savingsModal').find(".modalTitleText.modalNote").text("$" + currentlySaved);
+    		$('.savingsModal').modal({
+    			backdrop: 'static',
+    			keyboard: false
+    		});
+    		$('.savingsModal').modal('show');
+    	});
+    }
+
+});
+
+
+</script>
+
+</body>
+</html>
